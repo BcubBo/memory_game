@@ -11,6 +11,7 @@
  */
 
 // 洗牌函数来自于 http://stackoverflow.com/a/2450976
+let arrayPics = ['fa-diamond','fa-diamond','fa-paper-plane-o','fa-paper-plane-o','fa-anchor','fa-anchor','fa-bolt','fa-bolt','fa-cube','fa-cube','fa-leaf','fa-leaf','fa-bomb','fa-bomb','fa-bicycle','fa-bicycle'];
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -21,12 +22,13 @@ function shuffle(array) {
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
-    allLiClick();
     return array;
 }
-
+//需要保证有16个方格而且只有八件图表且不重复，或者是直接随机的给出图片的位置
 //所有的li需要添加点击事件,点击之后显示图片，并更改class属性值为，动态添加属性
 function allLiClick(){
+    //调用随机生成的方法进行图标的随机生成
+    let randompics = shuffle(arrayPics);
     let allLi = $(".card");
     console.log("Click Events add !");
     console.log("The length of li is "+allLi.length);
@@ -40,6 +42,10 @@ function allLiClick(){
             console.log($(this).find("i").attr("class"));
         });
     });
+    for(let i = 0;i<randompics.length;i++){
+        console.log("li循环后："+allLi[i]);
+        $(allLi[i]).find("i").attr("class",("fa "+randompics[i]));
+    };
 
 };
 /*
