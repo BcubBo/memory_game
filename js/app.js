@@ -41,6 +41,7 @@ function allLiClick(){
         $(this).on('click',function(){
             $(this).addClass("open show");
             console.log($(this).find("i").attr("class"));
+            //直接在此处进行判断传入参数即可，判断逻辑在下放给出
         });
     });
     //随机数生成完成
@@ -54,20 +55,23 @@ function allLiClick(){
 
 //匹配函数，什么时候判断？
 //应该含有相同的属性的函数
-var matching = function(){
+let tempMatchingBox = [];
+var matching = function(this){
+    let iclass = $(this).find("i").attr("class");
+
 
 };
 //匹配后怎么办，不匹配后怎么办
 
-var ifmatch = function(){
+var ifmatch = function(this){
 
 };
-var ifnotmatch = function(){
+var ifnotmatch = function(this){
 
 };
 
 //获得的星星数
-var stars = function(){
+var stars = function(this){
 
 };
 
