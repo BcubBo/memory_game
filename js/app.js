@@ -37,6 +37,7 @@ function allLiClick(){
         console.log("进入jquery each循环")
         $(this).on('click',function(){
             $(this).addClass("open show");
+            console.log($(this).find("i").attr("class"));
         });
     });
 
