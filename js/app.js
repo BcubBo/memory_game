@@ -11,6 +11,7 @@
  */
 
 // 洗牌函数来自于 http://stackoverflow.com/a/2450976
+//随机图片数组
 let arrayPics = ['fa-diamond','fa-diamond','fa-paper-plane-o','fa-paper-plane-o','fa-anchor','fa-anchor','fa-bolt','fa-bolt','fa-cube','fa-cube','fa-leaf','fa-leaf','fa-bomb','fa-bomb','fa-bicycle','fa-bicycle'];
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -42,12 +43,40 @@ function allLiClick(){
             console.log($(this).find("i").attr("class"));
         });
     });
+    //随机数生成完成
     for(let i = 0;i<randompics.length;i++){
         console.log("li循环后："+allLi[i]);
         $(allLi[i]).find("i").attr("class",("fa "+randompics[i]));
     };
 
 };
+
+
+//匹配函数，什么时候判断？
+//应该含有相同的属性的函数
+function matching(){
+
+};
+//匹配后怎么办，不匹配后怎么办
+
+function ifmatch(){
+
+};
+function ifnotmatch(){
+
+};
+
+//获得的星星数
+function stars(){
+
+};
+
+
+
+
+
+
+
 /*
  * 设置一张卡片的事件监听器。 如果该卡片被点击：
  *  - 显示卡片的符号（将这个功能放在你从这个函数中调用的另一个函数中）
