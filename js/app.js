@@ -54,20 +54,20 @@ function allLiClick(){
 
 //匹配函数，什么时候判断？
 //应该含有相同的属性的函数
-function matching(){
+var matching = function(){
 
 };
 //匹配后怎么办，不匹配后怎么办
 
-function ifmatch(){
+var ifmatch = function(){
 
 };
-function ifnotmatch(){
+var ifnotmatch = function(){
 
 };
 
 //获得的星星数
-function stars(){
+var stars = function(){
 
 };
 
