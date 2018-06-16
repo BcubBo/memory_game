@@ -21,16 +21,25 @@ function shuffle(array) {
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
-
+    allLiClick();
     return array;
 }
 
 //所有的li需要添加点击事件,点击之后显示图片，并更改class属性值为，动态添加属性
 function allLiClick(){
-    $(".card").on('click','li',function(){
-        //设置点击事件后更改样式显示图标
+    let allLi = $(".card");
+    console.log("Click Events add !");
+    console.log("The length of li is "+allLi.length);
+    //添加点击事件成功后，进行匹配判定。
+    //如果不匹配进行关闭操作，如果匹配就显示
+    console.log(allLi);
+    allLi.each(function(){
+        console.log("进入jquery each循环")
+        $(this).on('click',function(){
+            $(this).addClass("open show");
+        });
+    });
 
-    })
 };
 /*
  * 设置一张卡片的事件监听器。 如果该卡片被点击：
