@@ -28,7 +28,7 @@ function shuffle(array) {
 //所有的li需要添加点击事件,点击之后显示图片，并更改class属性值为，动态添加属性
 function allLiClick(){
     $(".card").on('click','li',function(){
-        $(this).css("backgroundColor",colorPicked);
+        //设置点击事件后更改样式显示图标
 
     })
 };
