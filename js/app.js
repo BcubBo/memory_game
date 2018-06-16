@@ -40,6 +40,7 @@ function allLiClick(){
         console.log("进入jquery each循环")
         $(this).on('click',function(){
             $(this).addClass("open show");
+            //添加标示关键字
             console.log($(this).find("i").attr("class"));
             //直接在此处进行判断传入参数即可，判断逻辑在下放给出
         });
@@ -55,7 +56,15 @@ function allLiClick(){
 
 //匹配函数，什么时候判断？
 //应该含有相同的属性的函数
+//还应有计数机制，记录已经匹配的卡牌数为多少，具体实现就是数字8为全匹配告知获胜
+//当已经匹配后要清除点击事件
+//使用双重数组的形式存储已经匹配的卡片
+//循环遍历临时数组数据进行匹配判定
 let tempMatchingBox = [];
+let matchingBox = [];
+//计数标示，只有click点击时进行存储，匹配后进行清除防止重复，进行取余操作来进行卡片匹配，决定采用此方法，在重新生成和刷新操作后要记得清除标记。或者只存储1/2作为标示
+//不可行。还是增长计数。保证单数计数始终和偶数计数进行匹配操作
+let mark = 0;
 var matching = function(this){
     let iclass = $(this).find("i").attr("class");
 
@@ -73,8 +82,12 @@ var ifnotmatch = function(this){
 //获得的星星数
 var stars = function(this){
 
-};
 
+};
+//计数器
+var  counting = function(){
+    mark++;
+};
 
 
 
