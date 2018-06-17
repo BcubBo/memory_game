@@ -87,8 +87,8 @@ var matching = function(currentObj){
             console.log("点击次数为偶次")
             if(tempMatchingClass[0] === tempMatchingClass[1]){
                 //如果值相等，将id放入已经匹配的容器中，并祛除click事件，样式更改为match样式。
-                console.log("进入判断匹配逻辑中")
-                matchingBox.push(tempMatchingId);
+                console.log("进入判断匹配逻辑中");
+                matchingBox.push([tempMatchingId]);
                 //匹配后操作,添加match后样式
                 $(("#"+tempMatchingId[0])).attr("class","card open show match");
                 $(("#"+tempMatchingId[1])).attr("class","card open show match");
@@ -107,6 +107,12 @@ var matching = function(currentObj){
     
             }
         }
+    }else if(tempMatchingId.length ===2 && tempMatchingId[0] === tempMatchingId[1]){
+        console.log("不匹配清空");
+        //清空操作
+        $(("#"+tempMatchingId[0])).attr("class","card");
+        tempMatchingClass = [];
+        tempMatchingId = [];  
     }
     //双重判定
 
