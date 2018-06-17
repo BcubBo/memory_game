@@ -9,7 +9,9 @@
  *   - 循环遍历每张卡片，创建其 HTML
  *   - 将每张卡的 HTML 添加到页面
  */
-
+let tempMatchingBox = [];
+let matchingBox = [];
+let mark = 0;
 // 洗牌函数来自于 http://stackoverflow.com/a/2450976
 //随机图片数组
 let arrayPics = ['fa-diamond','fa-diamond','fa-paper-plane-o','fa-paper-plane-o','fa-anchor','fa-anchor','fa-bolt','fa-bolt','fa-cube','fa-cube','fa-leaf','fa-leaf','fa-bomb','fa-bomb','fa-bicycle','fa-bicycle'];
@@ -60,27 +62,26 @@ function allLiClick(){
 //当已经匹配后要清除点击事件
 //使用双重数组的形式存储已经匹配的卡片
 //循环遍历临时数组数据进行匹配判定
-let tempMatchingBox = [];
-let matchingBox = [];
+
 //计数标示，只有click点击时进行存储，匹配后进行清除防止重复，进行取余操作来进行卡片匹配，决定采用此方法，在重新生成和刷新操作后要记得清除标记。或者只存储1/2作为标示
 //不可行。还是增长计数。保证单数计数始终和偶数计数进行匹配操作
-let mark = 0;
-var matching = function(this){
+
+var matching = function(){
     let iclass = $(this).find("i").attr("class");
 
 
 };
 //匹配后怎么办，不匹配后怎么办
 
-var ifmatch = function(this){
+var ifmatch = function(){
 
 };
-var ifnotmatch = function(this){
+var ifnotmatch = function(){
 
 };
 
 //获得的星星数
-var stars = function(this){
+var stars = function(){
 
 
 };
