@@ -9,12 +9,13 @@
  *   - 循环遍历每张卡片，创建其 HTML
  *   - 将每张卡的 HTML 添加到页面
  */
-let tempMatchingBox = [];
+let tempMatchingClass = [];
+let tempMatchingId = [];
 let matchingBox = [];
 let mark = 0;
 // 洗牌函数来自于 http://stackoverflow.com/a/2450976
 //随机图片数组
-let arrayPics = ['fa-diamond','fa-diamond','fa-paper-plane-o','fa-paper-plane-o','fa-anchor','fa-anchor','fa-bolt','fa-bolt','fa-cube','fa-cube','fa-leaf','fa-leaf','fa-bomb','fa-bomb','fa-bicycle','fa-bicycle'];
+let arrayCards = ['fa-diamond','fa-diamond','fa-paper-plane-o','fa-paper-plane-o','fa-anchor','fa-anchor','fa-bolt','fa-bolt','fa-cube','fa-cube','fa-leaf','fa-leaf','fa-bomb','fa-bomb','fa-bicycle','fa-bicycle'];
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -31,7 +32,7 @@ function shuffle(array) {
 //所有的li需要添加点击事件,点击之后显示图片，并更改class属性值为，动态添加属性
 function allLiClick(){
     //调用随机生成的方法进行图标的随机生成
-    let randompics = shuffle(arrayPics);
+    let randompics = shuffle(arrayCards);
     let allLi = $(".card");
     console.log("Click Events add !");
     console.log("The length of li is "+allLi.length);
@@ -45,12 +46,15 @@ function allLiClick(){
             //添加标示关键字
             console.log($(this).find("i").attr("class"));
             //直接在此处进行判断传入参数即可，判断逻辑在下放给出
+            counting();
         });
     });
     //随机数生成完成
     for(let i = 0;i<randompics.length;i++){
         console.log("li循环后："+allLi[i]);
         $(allLi[i]).find("i").attr("class",("fa "+randompics[i]));
+        //增加id属性
+        $(allLi[i]).attr("id",("li"+i));
     };
 
 };
@@ -67,7 +71,25 @@ function allLiClick(){
 //不可行。还是增长计数。保证单数计数始终和偶数计数进行匹配操作
 
 var matching = function(){
+    let result = false;
     let iclass = $(this).find("i").attr("class");
+    //获取class，获取id，暂时存储在临时数组中。
+    let iid = $(this).find("i").attr("id");
+    tempMatchingClass.push(iclass);
+    tempMatchingId.push(iid);
+    if(mark%2 === 0){
+        if(tempMatchingClass[0] === tempMatchingClass[1]){
+            //如果值相等，将id放入已经匹配的容器中，并祛除click事件，样式更改为match样式。
+            matchingBox.push(tempMatchingId);
+            //匹配后操作,添加match后样式
+            $(tempMatchingId[0]).attr("class",(tempMatchingClass[0]+ " match"));
+            $(tempMatchingId[1]).attr("class",(tempMatchingClass[1])+" match");
+            $(this).removeAttr("onclick");
+        }else{
+            //执行关闭操作
+
+        }
+    }
 
 
 };
@@ -88,6 +110,7 @@ var stars = function(){
 //计数器
 var  counting = function(){
     mark++;
+    console.log(mark);
 };
 
 
