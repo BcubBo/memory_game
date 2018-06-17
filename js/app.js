@@ -39,27 +39,30 @@ function allLiClick(){
     //添加点击事件成功后，进行匹配判定。
     //如果不匹配进行关闭操作，如果匹配就显示
     console.log(allLi);
-    allLi.each(function(){
-        console.log("进入jquery each循环")
-        $(this).on('click',function(){
-            $(this).addClass("open show");
-            //添加标示关键字
-            console.log($(this).find("i").attr("class"));
-            //直接在此处进行判断传入参数即可，判断逻辑在下放给出
-            counting();
-        });
-    });
-    //随机数生成完成
+    //随机数生成完成,应该放在最前面
     for(let i = 0;i<randompics.length;i++){
         console.log("li循环后："+allLi[i]);
         $(allLi[i]).find("i").attr("class",("fa "+randompics[i]));
         //增加id属性
         $(allLi[i]).attr("id",("li"+i));
     };
+    allLi.each(function(){
+        console.log("进入jquery each循环")
+        $(this).on('click',function(){
+            $(this).addClass("open show");
+            //添加标示关键字
+            console.log("====="+$(this).find("i").attr("class"));
+            //直接在此处进行判断传入参数即可，判断逻辑在下放给出
+            counting();
+            $(".moves").html(mark);
+            setTimeout((matching($(this))),2000);
+        });
+    });
+
 
 };
 
-
+//在进行匹配的时候要在合适的时候调用相应的样式修改函数
 //匹配函数，什么时候判断？
 //应该含有相同的属性的函数
 //还应有计数机制，记录已经匹配的卡牌数为多少，具体实现就是数字8为全匹配告知获胜
@@ -69,24 +72,37 @@ function allLiClick(){
 
 //计数标示，只有click点击时进行存储，匹配后进行清除防止重复，进行取余操作来进行卡片匹配，决定采用此方法，在重新生成和刷新操作后要记得清除标记。或者只存储1/2作为标示
 //不可行。还是增长计数。保证单数计数始终和偶数计数进行匹配操作
-
-var matching = function(){
+//还要判断是否为同一个
+var matching = function(currentObj){
+    console.log("进入最外层匹配模块");
     let result = false;
-    let iclass = $(this).find("i").attr("class");
+    let iclass = currentObj.find("i").attr("class");
     //获取class，获取id，暂时存储在临时数组中。
-    let iid = $(this).find("i").attr("id");
+    let iid = currentObj.attr("id");
     tempMatchingClass.push(iclass);
     tempMatchingId.push(iid);
+    console.log("tempClassContainer:"+tempMatchingClass+" tempidContainer:"+tempMatchingId);
     if(mark%2 === 0){
+        console.log("点击次数为偶次")
         if(tempMatchingClass[0] === tempMatchingClass[1]){
             //如果值相等，将id放入已经匹配的容器中，并祛除click事件，样式更改为match样式。
+            console.log("进入判断匹配逻辑中")
             matchingBox.push(tempMatchingId);
             //匹配后操作,添加match后样式
-            $(tempMatchingId[0]).attr("class",(tempMatchingClass[0]+ " match"));
-            $(tempMatchingId[1]).attr("class",(tempMatchingClass[1])+" match");
-            $(this).removeAttr("onclick");
+            $(("#"+tempMatchingId[0])).attr("class","card open show match");
+            $(("#"+tempMatchingId[1])).attr("class","card open show match");
+            currentObj.removeAttr("click");
+            console.log("匹配后："+tempMatchingClass+" "+tempMatchingId+"匹配后的数组中的值为:"+matchingBox);
+            tempMatchingClass = [];
+            tempMatchingId = [];
         }else{
             //执行关闭操作
+            console.log("进入不匹配逻辑");
+            //清空操作
+            $(("#"+tempMatchingId[0])).attr("class","card");
+            $(("#"+tempMatchingId[1])).attr("class","card");
+            tempMatchingClass = [];
+            tempMatchingId = [];
 
         }
     }
@@ -109,7 +125,7 @@ var stars = function(){
 };
 //计数器
 var  counting = function(){
-    mark++;
+    ++mark;
     console.log(mark);
 };
 
